@@ -187,6 +187,35 @@ createContatct = () =>
     return new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email)
 }
 
+//function to edit contact
+editConatct = () => 
+{
+    let firstName = prompt("Enter First-Name of contact which you want to edit : ");
+    let contact = addressBook.find(contact => contact.firstName == firstName);
+    if (contact == undefined)
+    {
+        console.log("Contact not found ");
+    }
+    else
+    {
+        try
+        {
+            contact.firstName = prompt("Enter First Name : ");
+            contact.lastName = prompt("Enter last Name : ");
+            contact.address = prompt("Enter Address : ");
+            contact.city = prompt("Enter City : ");
+            contact.state = prompt("Enter State : ");
+            contact.zip = prompt("Enter Zip : ");
+            contact.phoneNumber = prompt("Enter phone number : ");
+            contact.email = prompt("Enter Email address : ");
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+    }
+}
+
 //array to store new contact. 
 let addressBook  = new Array();
 
@@ -196,7 +225,7 @@ console.log("Welcome to address book");
 let isExit = false
 while (!isExit)
 {
-    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Exit :");
+    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Edit-Contact:\n4 Exit :");
 
     let userChoice = prompt("Enter the number as per against your choice : ");
     switch (userChoice)
@@ -215,6 +244,9 @@ while (!isExit)
             console.log(addressBook);
             break;
         case "3":
+            editConatct();
+            break;
+        case "4":
             console.log("Thank You For Using Address-Book.");
             isExit = true;
             break;
