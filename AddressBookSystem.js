@@ -173,6 +173,8 @@ class Contact
 //array to store new contact. 
 let addressBook  = new Array();
 
+addressBook.push(new Contact("Mihir","Patil","Shriwardhan","Raigad","Maharashta",402110,"91 9987000000","mihir@gmail.com"));
+
 //prompt message on console for user input.
 const prompt = require("prompt-sync")({ sigint: true });
 
@@ -267,13 +269,21 @@ countContact = () =>
     console.log("\nNumber of contacts are " + numberOfContact + " \n");     
 }
 
+//searching person in a city or state.
+searchContact = () =>
+{
+    let searchKey = prompt("\nEnter city or state of contact which you want to search : ");
+    let searchResultList = addressBook.filter(contact => contact.city == searchKey || contact.state == searchKey);
+    console.log(`The person having ${searchKey} are ${searchResultList.map(contact => contact.firstName)}`);
+}
+
 //user choice and calling functions.
 console.log("\nWelcome to address book\n");
 
 let isExit = false
 while (!isExit)
 {
-    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Print Count Of Contacts In Address-Book:\n4 Edit-Contact:\n5 Delete-Contact:\n6 Exit :");
+    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Print Count Of Contacts In Address-Book:\n4 Edit-Contact:\n5 Delete-Contact:\n6 Search Person By City Or State:\n7 Exit :");
 
     let userChoice = prompt("Enter the number as per against your choice : ");
     switch (userChoice)
@@ -306,6 +316,10 @@ while (!isExit)
             deleteConatct();
             break;
         case "6":
+            //search person in city or state.
+            searchContact();
+            break;
+        case "7":
             //exit from program.
             console.log("Thank You For Using Address-Book.");
             isExit = true;
