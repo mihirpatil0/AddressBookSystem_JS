@@ -170,12 +170,56 @@ class Contact
     }
 }
 
-try
+//prompt message on console for user input.
+const prompt = require("prompt-sync")({ sigint: true });
+
+//function to create new contact
+createContatct = () =>
 {
-    let contact = new Contact("Mihir","Patil","Shriwardhan","Raigad","Maharashtra",402106,"91 9987884800","mihir@gmail.com")
-    console.log(contact.toString());
+    let firstName = prompt("Enter First Name : ");
+    let lastName = prompt("Enter last Name : ");
+    let address = prompt("Enter Address : ");
+    let city = prompt("Enter City : ");
+    let state = prompt("Enter State : ");
+    let zip = prompt("Enter Zip : ");
+    let phoneNumber = prompt("Enter phone number : ");
+    let email = prompt("Enter Email address : ");
+    return new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email)
 }
-catch(error)
+
+//array to store new contact. 
+let addressBook  = new Array();
+
+//user choice and calling functions.
+console.log("Welcome to address book");
+
+let isExit = false
+while (!isExit)
 {
-    console.error(error);
+    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Exit :");
+
+    let userChoice = prompt("Enter the number as per against your choice : ");
+    switch (userChoice)
+    {
+        case "1":
+            try
+            {
+                addressBook.push(createContatct())
+            } 
+            catch (error)
+            {
+                console.error(error);
+            }
+            break;
+        case "2":
+            console.log(addressBook);
+            break;
+        case "3":
+            console.log("Thank You For Using Address-Book.");
+            isExit = true;
+            break;
+        default:
+            console.log("Invalid Option");
+            break;
+    }
 }
