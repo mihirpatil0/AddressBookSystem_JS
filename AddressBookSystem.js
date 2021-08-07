@@ -269,12 +269,24 @@ countContact = () =>
     console.log("\nNumber of contacts are " + numberOfContact + " \n");     
 }
 
-//searching person in a city or state.
-searchContact = () =>
+function search()
 {
-    let searchKey = prompt("\nEnter city or state of contact which you want to search : ");
-    let searchResultList = addressBook.filter(contact => contact.city == searchKey || contact.state == searchKey);
-    console.log(`The person having ${searchKey} are ${searchResultList.map(contact => contact.firstName)}`);
+    let searchKey = prompt("Enter city or state of contact which you want to search: ");
+    return addressBook.filter(contact => contact.city == searchKey || contact.state == searchKey);
+}
+
+//method to search contact
+function searchContact()
+{
+    let searchResultList = search();
+    console.log(`The person are ${searchResultList.map(contact => contact.firstName)}`);
+}
+
+//method to view contact
+function viewContact()
+{
+    let searchResultList = search();
+    console.log(`The person are ${searchResultList}`);
 }
 
 //user choice and calling functions.
@@ -283,7 +295,7 @@ console.log("\nWelcome to address book\n");
 let isExit = false
 while (!isExit)
 {
-    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Print Count Of Contacts In Address-Book:\n4 Edit-Contact:\n5 Delete-Contact:\n6 Search Person By City Or State:\n7 Exit :");
+    console.log("1 Add-Contact :\n2 Display-Contact :\n3 Print Count Of Contacts In Address-Book:\n4 Edit-Contact:\n5 Delete-Contact:\n6 Search Person By City Or State:\n7 View Contact By City Or State:\n8 Exit :");
 
     let userChoice = prompt("Enter the number as per against your choice : ");
     switch (userChoice)
@@ -320,6 +332,10 @@ while (!isExit)
             searchContact();
             break;
         case "7":
+            //view contact by city or state.
+            viewContact();
+            break;
+        case "8":
             //exit from program.
             console.log("Thank You For Using Address-Book.");
             isExit = true;
