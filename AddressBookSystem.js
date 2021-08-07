@@ -190,6 +190,24 @@ createContatct = () =>
     return new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email)
 }
 
+//method to add contact and check duplicate entries
+function checkDuplicateContact()
+{
+    //calling createcontact function.
+    let newContact = createContatct();
+
+    let alreadyExists = addressBook.filter(contact => contact.firstName == newContact.firstName).length;
+    if (alreadyExists)
+    {
+        console.log("\nConatct already exists.\n");
+    }
+    else
+    {
+        addressBook.push(newContact);
+        console.log("\nAdded sucessfully\n");
+    }
+}
+
 //function to edit contact
 editConatct = () => 
 {
@@ -234,19 +252,23 @@ deleteConatct = () =>
     }
     if (isdelete)
     {
-        console.log("Contact deleted sucessfully.");
+        console.log("\nContact deleted sucessfully.\n");
     }
     else
     {
-        console.log("Contact not found.");
+        console.log("\nContact not found.\n");
     }
 }
 
-//counting total contacts present in addressbook.
-let countCotact = addressBook.reduce(contact => contact + 1, 0);
+//fuction to count number of contact in addressbook.
+countContact = () =>
+{
+    let numberOfContact = addressBook.map(contact => contact).reduce(numberOfContact => numberOfContact + 1, 0);
+    console.log("\nNumber of contacts are " + numberOfContact + " \n");     
+}
 
 //user choice and calling functions.
-console.log("Welcome to address book");
+console.log("\nWelcome to address book\n");
 
 let isExit = false
 while (!isExit)
@@ -260,7 +282,7 @@ while (!isExit)
             //Create and Add new contacts.
             try
             {
-                addressBook.push(createContatct())
+                checkDuplicateContact();
             } 
             catch (error)
             {
@@ -273,7 +295,7 @@ while (!isExit)
             break;
         case "3":
             //printing number of contacts in addressbook.
-            console.log("Total count of contacts in address-book : " + countCotact);
+            countContact();
             break;
         case "4":
             //edit contact.
